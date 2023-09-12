@@ -42,6 +42,7 @@ class TabberSettingWidget(QtWidgets.QWidget):
         self.table_cmds.setHorizontalHeaderLabels(["name", "cmd"])
         header = self.table_cmds.horizontalHeader()       
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        self.table_cmds.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
         for i, (name,cmd) in enumerate(CMD_LIST):
             item_name = QtWidgets.QTableWidgetItem(name)
@@ -74,7 +75,7 @@ class TabberSettingWidget(QtWidgets.QWidget):
         self.table_all_wins.setHorizontalHeaderLabels(["pid", "wid", "name"])
         header = self.table_all_wins.horizontalHeader()       
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
-
+        self.table_all_wins.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
         self.tool_bar_fresh_btn_click()
         self.table_all_wins.cellDoubleClicked.connect(self.table_all_wins_cell_double_click)
