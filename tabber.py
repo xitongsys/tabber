@@ -60,7 +60,7 @@ class TabberSettingWidget(QtWidgets.QWidget):
         # All Win ToolBar
         self.tool_bar_all_wins = QtWidgets.QToolBar()
 
-        self.tool_bar_all_wins_name_label = QtWidgets.QLabel("All Windows     ")
+        self.tool_bar_all_wins_name_label = QtWidgets.QLabel("All Windows   ")
         self.tool_bar_all_wins_fresh_btn = QtWidgets.QPushButton("fresh")
         self.tool_bar_all_wins.addWidget(self.tool_bar_all_wins_name_label)
         self.tool_bar_all_wins.addWidget(self.tool_bar_all_wins_fresh_btn)
@@ -113,7 +113,7 @@ class TabberSettingWidget(QtWidgets.QWidget):
         wid = int(self.table_all_wins.item(row,1).text(),16)
         name = self.table_all_wins.item(row,2).text()
         self.tabwidget.new_tab(pid,wid,name)
-        self.tool_bar_all_wins_fresh_btn()
+        self.tool_bar_fresh_btn_click()
 
     
     @QtCore.Slot()
@@ -156,6 +156,7 @@ class TabberWinWidget(QtWidgets.QWidget):
         self.name = name
         self.proc = proc
         self.win = QtGui.QWindow.fromWinId(wid)
+        self.old_flags = self.win.flags()
 
         self.layout = QtWidgets.QVBoxLayout()
         
@@ -169,7 +170,9 @@ class TabberWinWidget(QtWidgets.QWidget):
     
     def tabber_close(self):
         win = QtGui.QWindow.fromWinId(self.wid)
-        win.close()
+        win.setParent(QtGui.QWindow.fromWinId(0))
+        win.setFlags(self.old_flags)
+        self.win_container.close()
         if self.proc:
             self.proc.terminate()
 
@@ -182,7 +185,7 @@ class TabberTabWidget(QtWidgets.QTabWidget):
 
         self.setting_tab = TabberSettingWidget(self)
 
-        self.addTab(self.setting_tab, "tabber")       
+        self.addTab(self.setting_tab, "MAIN")       
 
         self.tabCloseRequested.connect(self.close_tab)
     
