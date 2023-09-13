@@ -1,4 +1,4 @@
-import sys
+import sys,os,signal
 from PySide6 import QtCore, QtWidgets, QtGui
 import PySide6.QtGui
 import wmctrl
@@ -6,10 +6,14 @@ import wmctrl
 CMD_LIST = [
     ("xterm", "xterm"),
     ("rdp01", "xfreerdp /u:zxt /p:t /v:127.0.0.1 /port:33891 -wallpaper +clipboard +compression /bpp:24 /dynamic-resolution"),
+    ("vnc-157", "vncviewer -passwd <(vncpasswd -f <<<'yourpassword') 192.168.0.157:5900"),
 ]
 
 
 class TabberSettingWidget(QtWidgets.QWidget):
+    '''
+    The first MAIN tab
+    '''
     def __init__(self, tabwidget):
         super().__init__()
         self.layout = QtWidgets.QVBoxLayout()
@@ -147,6 +151,9 @@ class TabberSettingWidget(QtWidgets.QWidget):
 
 
 class TabberWinWidget(QtWidgets.QWidget):
+    '''
+    Window container tab
+    '''
     def __init__(self, pid:int, wid:int, name:str, proc=None):
         super().__init__()
         self.tab_type = 'win'
@@ -170,14 +177,15 @@ class TabberWinWidget(QtWidgets.QWidget):
     
     def tabber_close(self):
         win = QtGui.QWindow.fromWinId(self.wid)
-        win.setParent(QtGui.QWindow.fromWinId(0))
-        win.setFlags(self.old_flags)
-        self.win_container.close()
+        os.kill(self.pid, signal.SIGKILL)
         if self.proc:
             self.proc.terminate()
 
 
 class TabberTabWidget(QtWidgets.QTabWidget):
+    '''
+    TabWidget
+    '''
     def __init__(self):
         super().__init__()
         self.setTabsClosable(True)
