@@ -175,11 +175,11 @@ class TabberWinWidget(QtWidgets.QWidget):
         return super().resizeEvent(event)
     
     def tabber_close(self):
-        win = QtGui.QWindow.fromWinId(self.wid)
-        os.kill(self.pid, signal.SIGKILL)
-        if self.proc:
-            self.proc.terminate()
-
+        try:
+            os.kill(self.pid, signal.SIGKILL)
+        except:
+            pass
+        
 
 class TabberTabWidget(QtWidgets.QTabWidget):
     '''
