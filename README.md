@@ -2,7 +2,7 @@
 
 *tabber* is a program to manage other program windows to one window as its tabs. The code is very simple and it has only one python file and you can change it easily to fit your own needs.
 
-It can be used as a client manager for rbp/vnc. Actually I used Remmina firstly, but it often crash and can't manager other window such as some terminals. So I write this tool which can manage all windows.
+It can be used as a client manager for rdp/vnc. Actually I used Remmina firstly, but it often crash and can't manager other window such as some terminals. So I write this tool which can manage all windows.
 
 Without *tabber*，windows scatter around in mess
 
