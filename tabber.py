@@ -1,6 +1,5 @@
 import sys,os,signal
 from PySide6 import QtCore, QtWidgets, QtGui
-import PySide6.QtGui
 import wmctrl
 
 CMD_LIST = [
