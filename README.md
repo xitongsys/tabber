@@ -4,12 +4,12 @@
 
 It can be used as a client manager for rbp/vnc. Actually I used Remmina firstly, but it often crash and can't manager other window such as some terminals. So I write this tool which can manage all windows.
 
-Without *tabber*, there are many windows
+Without *tabber*，windows scatter around in mess
 
 <img src="01.jpg" width="500"/>
 
 
-Using *tabber*, we can merge all them to one window
+With *tabber*，windows queue up at your hand
 
 <img src="02.jpg" width="500"/>
 
