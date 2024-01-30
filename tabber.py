@@ -207,8 +207,12 @@ class TabberTabWidget(QtWidgets.QTabWidget):
     def close_tab(self, idx):
         widget = self.widget(idx)
         if widget.tab_type == 'win':
-            widget.tabber_close()
-            self.removeTab(idx)
+            ok = QtWidgets.QMessageBox.question(self, "Close", "close this window?", 
+                                                     QtWidgets.QMessageBox.Ok, 
+                                                     QtWidgets.QMessageBox.Cancel)
+            if ok == QtWidgets.QMessageBox.Ok:
+                widget.tabber_close()
+                self.removeTab(idx)
         
     
 
